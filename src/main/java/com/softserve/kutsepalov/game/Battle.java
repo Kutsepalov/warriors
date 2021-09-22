@@ -19,17 +19,24 @@ public final class Battle {
 	throw new IllegalStateException();
     }
     
-    public static boolean fight(Warrior first, Warrior second) {
+    /**
+     * Method which conduct fight between two warriors and return result of battle.
+     * @param attacker warrior
+     * @param defender warrior
+     * @return <b>true</b> if the attacker wins the battle
+     */
+    public static boolean fight(Warrior attacker, Warrior defender) {
 	boolean res = false;
-	while (first.isAlive() && second.isAlive()) {
-	    boolean hasSecondDied = first.hit(second);
-	    if(!hasSecondDied) {		
-		second.hit(first);
+	while (attacker.isAlive() && defender.isAlive()) {
+	    boolean hasDefenderDied = attacker.hit(defender);
+	    if(!hasDefenderDied) {		
+		defender.hit(attacker);
 	    }
 	}
-	if(first.isAlive()) {
+	if(attacker.isAlive()) {
 	    res = true;
 	}
 	return res;
     }
+    
 }
