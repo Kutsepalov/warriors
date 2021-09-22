@@ -11,7 +11,7 @@ package com.softserve.kutsepalov.game.entity;
  * @author Max Kutsepalov
  *
  */
-public class Warrior {
+public class Warrior implements Fighter {
     protected int health;
     protected int attack;
     private boolean isAlive;
@@ -21,20 +21,21 @@ public class Warrior {
 	attack = 5;
 	isAlive = true;
     }
-    
+       
+    @Override
     public boolean hit(Warrior enemy) {
-	boolean hasKilled = false;
+	boolean enemyhasKilled = false;
 	if(isAlive && enemy.isAlive) {
 	    enemy.health -= attack;
-	    enemy.updateAliveState();
+	    enemy.updateVitalState();
 	    if(!enemy.isAlive) {
-		hasKilled = true;
+		enemyhasKilled = true;
 	    }
 	}
-	return hasKilled;
+	return enemyhasKilled;
     }
     
-    private void updateAliveState() {
+    private void updateVitalState() {
 	if(health <= 0) {
 	    isAlive = false;
 	    health = 0;
