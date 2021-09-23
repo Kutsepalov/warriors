@@ -15,7 +15,7 @@ public class Knight extends Warrior {
     
     public Knight() {
 	super();
-	super.attack = 7;
+	this.setAttack(7);
     }
     
 }
