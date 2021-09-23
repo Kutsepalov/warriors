@@ -27,13 +27,13 @@ class WarriorTest {
     @BeforeAll
     static void setUpBeforeClass() {
 	attacker = new Knight();
-	attacker.attack = 25;
+	attacker.setAttack(25);
 	victim = new Warrior();
     }
     
     @BeforeEach
     void setUpBefore() {
-	victim.health = 50;
+	victim.setHealth(50);
     }
     
     @Test

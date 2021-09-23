@@ -7,6 +7,7 @@
  */
 package com.softserve.kutsepalov.game;
 
+import com.softserve.kutsepalov.game.entity.Army;
 import com.softserve.kutsepalov.game.entity.Warrior;
 
 /**
@@ -39,4 +40,18 @@ public final class Battle {
 	return res;
     }
     
+    public static boolean fight(Army<Warrior> attacker, Army<Warrior> defender) {
+	boolean res = false;
+	while(!attacker.isEmpty() && !defender.isEmpty()) {
+	    if(fight(attacker.peek(), defender.peek())) {
+		defender.removeUnit();
+	    } else {
+		attacker.removeUnit();
+	    }
+	}
+	if(!attacker.isEmpty()) {
+	    res = true;
+	}
+	return res;
+    }
 }

@@ -11,53 +11,23 @@ package com.softserve.kutsepalov.game.entity;
  * @author Max Kutsepalov
  *
  */
-public class Warrior implements Fighter {
-    protected int health;
-    protected int attack;
-    private boolean isAlive;
+public class Warrior extends Unit implements Fighter {
     
     public Warrior() {
-	health = 50;
-	attack = 5;
-	isAlive = true;
+	this.setHealth(50);
+	this.setAttack(5);
     }
        
     @Override
-    public boolean hit(Warrior enemy) {
+    public boolean hit(Unit enemy) {
 	boolean enemyhasKilled = false;
-	if(isAlive && enemy.isAlive) {
-	    enemy.health -= attack;
-	    enemy.updateVitalState();
-	    if(!enemy.isAlive) {
+	if(this.isAlive() && enemy.isAlive()) {
+	    enemy.setHealth(enemy.getHealth() - this.getAttack());
+	    if(!enemy.isAlive()) {
 		enemyhasKilled = true;
 	    }
 	}
 	return enemyhasKilled;
     }
-    
-    private void updateVitalState() {
-	if(health <= 0) {
-	    isAlive = false;
-	    health = 0;
-	}
-    }
-    
-    /**
-     * @return the health
-     */
-    public int getHealth() {
-        return health;
-    }
-    /**
-     * @return the damage
-     */
-    public int getAttack() {
-        return attack;
-    }
-    /**
-     * @return the isAlive
-     */
-    public boolean isAlive() {
-        return isAlive;
-    }
+ 
 }
