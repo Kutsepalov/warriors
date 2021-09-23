@@ -14,7 +14,6 @@ package com.softserve.kutsepalov.game.entity;
 public class Knight extends Warrior {
     
     public Knight() {
-	super();
 	this.setAttack(7);
     }
     

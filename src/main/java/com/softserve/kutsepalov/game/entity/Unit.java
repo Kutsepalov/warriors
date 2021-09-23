@@ -42,7 +42,7 @@ public abstract class Unit {
         this.health = health;
         updateVitalState();
     }
-
+    
     /**
      * @param attack the attack of unit to set
      */

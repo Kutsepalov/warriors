@@ -19,7 +19,7 @@ public class Warrior extends Unit implements Fighter {
     }
        
     @Override
-    public boolean hit(Warrior enemy) {
+    public boolean hit(Unit enemy) {
 	boolean enemyhasKilled = false;
 	if(this.isAlive() && enemy.isAlive()) {
 	    enemy.setHealth(enemy.getHealth() - this.getAttack());

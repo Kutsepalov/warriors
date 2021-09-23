@@ -18,5 +18,5 @@ public interface Fighter {
      * @param entity
      * @return <b>true</b> if entity has died
      */
-    boolean hit(Warrior entity);
+    boolean hit(Unit entity);
 }
