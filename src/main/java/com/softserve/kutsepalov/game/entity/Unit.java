@@ -15,7 +15,7 @@ public abstract class Unit {
     private int health;
     private int attack;
     private boolean isAlive = false;
- 
+    
     /**
      * @return the health
      */
@@ -48,6 +48,10 @@ public abstract class Unit {
      */
     protected void setAttack(int attack) {
         this.attack = attack;
+    }
+    
+    protected void doDamage(int damage) {
+	this.setHealth(health - damage);
     }
     
     private void updateVitalState() {

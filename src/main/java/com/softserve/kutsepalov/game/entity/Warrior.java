@@ -22,7 +22,7 @@ public class Warrior extends Unit implements Fighter {
     public boolean hit(Unit enemy) {
 	boolean enemyhasKilled = false;
 	if(this.isAlive() && enemy.isAlive()) {
-	    enemy.setHealth(enemy.getHealth() - this.getAttack());
+	    enemy.doDamage(this.getAttack());
 	    if(!enemy.isAlive()) {
 		enemyhasKilled = true;
 	    }

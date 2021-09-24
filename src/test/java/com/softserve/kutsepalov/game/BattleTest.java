@@ -21,38 +21,40 @@ import com.softserve.kutsepalov.game.entity.Warrior;
  *
  */
 class BattleTest {
-    private Warrior knight;
-    private Warrior warrior;
+    private Warrior chuck;
+    private Warrior bruce;
+
     private Army<Warrior> hero; 
     private Army<Warrior> enemy;
     
     @BeforeEach
     void setUpBefore() {
-	knight = new Knight();
-	warrior = new Warrior();
 	hero = new Army<>();
 	enemy = new Army<>();
+	
+	chuck = new Warrior();
+	bruce = new Knight();
     }
     
     @Test
-    void knightMustWinWarrior() {
-	assertTrue(Battle.fight(knight, warrior));
+    void bruceShouldWinChuck() {
+	assertTrue(Battle.fight(bruce, chuck));
     }
     
     @Test
-    void warriorMustLoseKnight() {
-	assertFalse(Battle.fight(warrior, knight));
+    void chuckShouldLoseBruce() {
+	assertFalse(Battle.fight(chuck, bruce));
     }
     
     @Test
-    void heroShouldWinEnemy() {
+    void heroArmyShouldWinEnemyArmy() {
 	hero.addUnit(3, Knight.class);
 	enemy.addUnit(3, Warrior.class);
 	assertTrue(Battle.fight(hero, enemy));
     }
     
     @Test
-    void heroShouldLoseEnemy() {
+    void heroArmyShouldLoseEnemyArmy() {	
 	hero.addUnit(20, Warrior.class);
 	hero.addUnit(5, Knight.class);
 	enemy.addUnit(30, Warrior.class);
