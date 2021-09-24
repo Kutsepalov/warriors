@@ -12,12 +12,16 @@ package com.softserve.kutsepalov.game.entity;
  *
  */
 public class Defender extends Warrior {
+    public static final int MAX_HEALTH = 60;
+    public static final int DEFAULT_ATTACK = 3;
+    public static final int DEFAULT_DEFENSE = 2;
+    
     private int defense;
     
     public Defender() {
-	this.setHealth(60);
-	this.setAttack(3);
-	this.setDefense(2);
+	this.setHealth(MAX_HEALTH);
+	this.setAttack(DEFAULT_ATTACK);
+	this.setDefense(DEFAULT_DEFENSE);
     }
     
     @Override

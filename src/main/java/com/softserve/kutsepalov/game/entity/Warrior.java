@@ -12,10 +12,12 @@ package com.softserve.kutsepalov.game.entity;
  *
  */
 public class Warrior extends Unit implements Fighter {
+    public static final int MAX_HEALTH = 50;
+    public static final int DEFAULT_ATTACK = 5;
     
     public Warrior() {
-	this.setHealth(50);
-	this.setAttack(5);
+	this.setHealth(MAX_HEALTH);
+	this.setAttack(DEFAULT_ATTACK);
     }
        
     @Override
