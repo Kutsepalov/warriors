@@ -19,7 +19,7 @@ import com.softserve.kutsepalov.game.Battle;
  * @author Max Kutsepalov
  *
  */
-public class DefenderTest {
+class DefenderTest {
     private Warrior chuck;
     private Warrior bruce;
     private Warrior carl;
