@@ -5,10 +5,12 @@
  *
  * Created on Sep 23, 2021 12:08:35 PM
  */
-package com.softserve.kutsepalov.game.entity;
+package com.softserve.kutsepalov.game.collection;
 
 import java.util.Deque;
 import java.util.LinkedList;
+
+import com.softserve.kutsepalov.game.entity.Unit;
 
 /**
  * @author Max Kutsepalov

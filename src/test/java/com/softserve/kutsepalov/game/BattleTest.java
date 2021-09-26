@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.softserve.kutsepalov.game.entity.Army;
+import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.entity.Knight;
 import com.softserve.kutsepalov.game.entity.Warrior;
 

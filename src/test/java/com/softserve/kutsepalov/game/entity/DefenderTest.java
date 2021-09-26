@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.softserve.kutsepalov.game.Battle;
+import com.softserve.kutsepalov.game.collection.Army;
 
 /**
  * @author Max Kutsepalov

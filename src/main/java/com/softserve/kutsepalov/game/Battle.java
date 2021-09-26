@@ -7,7 +7,7 @@
  */
 package com.softserve.kutsepalov.game;
 
-import com.softserve.kutsepalov.game.entity.Army;
+import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.entity.Warrior;
 
 /**
