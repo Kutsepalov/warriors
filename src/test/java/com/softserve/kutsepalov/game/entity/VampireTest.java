@@ -9,23 +9,19 @@ package com.softserve.kutsepalov.game.entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.softserve.kutsepalov.game.factory.WarriorFactory;
 
 /**
  * @author Max Kutsepalov
  *
  */
 class VampireTest {
-    private static Warrior bruce;
-    private static Warrior victim;
-    
-    @BeforeAll
-    static void setUpBeforeAll() {
-	bruce = new Vampire();
-	victim = new Warrior();
-    }
+    private WarriorFactory factory = new WarriorFactory();
+    private Warrior bruce = factory.getWarrior(WarriorTypes.VAMPIRE);
+    private Warrior victim = factory.getWarrior(WarriorTypes.WARRIOR);;
     
     @BeforeEach
     void setUpBeforeEach() {
@@ -62,5 +58,4 @@ class VampireTest {
 	bruce.hit(victim);
 	assertEquals(0, bruce.getHealth());
     }
-
 }

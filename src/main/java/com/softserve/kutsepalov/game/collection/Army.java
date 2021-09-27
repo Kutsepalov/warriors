@@ -5,10 +5,13 @@
  *
  * Created on Sep 23, 2021 12:08:35 PM
  */
-package com.softserve.kutsepalov.game.entity;
+package com.softserve.kutsepalov.game.collection;
 
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedList;
+
+import com.softserve.kutsepalov.game.entity.Unit;
 
 /**
  * @author Max Kutsepalov
@@ -18,7 +21,11 @@ public class Army<T extends Unit> {
     private Deque<T> units = new LinkedList<>();
     
     public void addUnit(T unit) {
-	units.push(unit);
+	if(unit.isAlive()) {
+	    units.push(unit);
+	} else {
+	    throw new IllegalArgumentException("Unit is dead");
+	}
     }
     
     @SuppressWarnings("deprecation")
@@ -33,19 +40,35 @@ public class Army<T extends Unit> {
     }
     
     public T removeUnit() {
+	clear();
 	return units.pollFirst();
     }
     
     public T peek() {
+	clear();
 	return units.peek();
     }
     
     public int size() {
+	clear();
 	return units.size();
     }
     
     public boolean isEmpty() {
-	return units.isEmpty();
+	boolean res = true;
+	if(size() != 0) {
+	   res = false; 
+	}
+	return res;
     }
     
+    private void clear() {
+	Iterator<T> iterator = units.iterator();
+	while(iterator.hasNext()) {
+	    T unit = iterator.next();
+	    if(!unit.isAlive()) {
+		iterator.remove();
+	    }
+	}
+    }
 }
