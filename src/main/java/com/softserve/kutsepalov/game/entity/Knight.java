@@ -13,10 +13,10 @@ package com.softserve.kutsepalov.game.entity;
  */
 public class Knight extends Warrior {
     public static final int MAX_HEALTH = 50;
-    public static final int DEFAULT_ATTACK = 7;
-    
-    public Knight() {
-	this.setAttack(DEFAULT_ATTACK);
+    public static final int DEFAULT_ATTACK = 7;   
+
+    @Override
+    protected int getDefaultAttack() {
+	return DEFAULT_ATTACK;
     }
-    
 }

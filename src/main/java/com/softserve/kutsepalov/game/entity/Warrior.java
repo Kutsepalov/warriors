@@ -14,22 +14,27 @@ package com.softserve.kutsepalov.game.entity;
 public class Warrior extends Unit implements Fighter {
     public static final int MAX_HEALTH = 50;
     public static final int DEFAULT_ATTACK = 5;
-    
-    public Warrior() {
-	this.setHealth(MAX_HEALTH);
-	this.setAttack(DEFAULT_ATTACK);
-    }
        
     @Override
     public boolean hit(Unit enemy) {
 	boolean enemyhasKilled = false;
 	if(this.isAlive() && enemy.isAlive()) {
-	    enemy.doDamage(this.getAttack());
+	    enemy.getDamage(this.getAttack());
 	    if(!enemy.isAlive()) {
 		enemyhasKilled = true;
 	    }
 	}
 	return enemyhasKilled;
+    }
+
+    @Override
+    protected int getDefaultHealth() {
+	return MAX_HEALTH;
+    }
+
+    @Override
+    protected int getDefaultAttack() {
+	return DEFAULT_ATTACK;
     }
  
 }

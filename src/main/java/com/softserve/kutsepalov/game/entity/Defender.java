@@ -16,21 +16,15 @@ public class Defender extends Warrior {
     public static final int DEFAULT_ATTACK = 3;
     public static final int DEFAULT_DEFENSE = 2;
     
-    private int defense;
-    
-    public Defender() {
-	this.setHealth(MAX_HEALTH);
-	this.setAttack(DEFAULT_ATTACK);
-	this.setDefense(DEFAULT_DEFENSE);
-    }
+    private int defense = getDefaultDefense();
     
     @Override
-    protected void doDamage(int damage) {
+    protected void getDamage(int damage) {
 	damage -= defense;
 	if(damage < 0) {
 	    damage = 0;
 	}
-	super.doDamage(damage);
+	super.getDamage(damage);
     }
 
     /**
@@ -45,5 +39,19 @@ public class Defender extends Warrior {
      */
     protected void setDefense(int defense) {
         this.defense = defense;
+    }
+    
+    @Override
+    protected int getDefaultHealth() {
+	return MAX_HEALTH;
+    }
+
+    @Override
+    protected int getDefaultAttack() {
+	return DEFAULT_ATTACK;
+    }
+    
+    protected int getDefaultDefense() {
+	return DEFAULT_DEFENSE;
     }
 }
