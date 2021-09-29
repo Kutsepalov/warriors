@@ -13,7 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.softserve.kutsepalov.game.collection.Army;
+import com.softserve.kutsepalov.game.entity.Defender;
 import com.softserve.kutsepalov.game.entity.Knight;
+import com.softserve.kutsepalov.game.entity.Lancer;
+import com.softserve.kutsepalov.game.entity.Vampire;
 import com.softserve.kutsepalov.game.entity.Warrior;
 
 /**
@@ -59,5 +62,33 @@ class BattleTest {
 	hero.addUnit(5, Knight.class);
 	enemy.addUnit(30, Warrior.class);
 	assertFalse(Battle.fight(hero, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmyWithLancers() {
+	hero.addUnit(5, Lancer.class);
+	hero.addUnit(3, Vampire.class);
+	hero.addUnit(4, Warrior.class);
+	hero.addUnit(2, Defender.class);
+	
+	enemy.addUnit(4, Warrior.class);
+	enemy.addUnit(4, Defender.class);
+	enemy.addUnit(6, Vampire.class);
+	enemy.addUnit(5, Lancer.class);
+	assertFalse(Battle.fight(hero, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmyWithLancers2() {
+	hero.addUnit(7, Lancer.class);
+	hero.addUnit(3, Vampire.class);
+	hero.addUnit(4, Warrior.class);
+	hero.addUnit(2, Defender.class);
+	
+	enemy.addUnit(4, Warrior.class);
+	enemy.addUnit(4, Defender.class);
+	enemy.addUnit(6, Vampire.class);
+	enemy.addUnit(4, Lancer.class);
+	assertTrue(Battle.fight(hero, enemy));
     }
 }

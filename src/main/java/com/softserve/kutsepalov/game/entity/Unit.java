@@ -12,9 +12,8 @@ package com.softserve.kutsepalov.game.entity;
  *
  */
 public abstract class Unit {
-    private int health;
-    private int attack;
-    private boolean isAlive = false;
+    private int health = getDefaultHealth();
+    private int attack = getDefaultAttack();
     
     /**
      * @return the health
@@ -32,6 +31,12 @@ public abstract class Unit {
      * @return the isAlive
      */
     public boolean isAlive() {
+	boolean isAlive;
+	if(health <= 0) {
+	    isAlive = false;
+	} else {
+	    isAlive = true;
+	}
         return isAlive;
     }
 
@@ -39,8 +44,10 @@ public abstract class Unit {
      * @param health the health of unit to set
      */
     protected void setHealth(int health) {
+	if(health < 0) {
+	    health = 0;
+	}
         this.health = health;
-        updateVitalState();
     }
     
     /**
@@ -50,16 +57,10 @@ public abstract class Unit {
         this.attack = attack;
     }
     
-    protected void doDamage(int damage) {
+    protected void getDamage(int damage) {
 	this.setHealth(health - damage);
     }
     
-    private void updateVitalState() {
-	if(health <= 0) {
-	    isAlive = false;
-	    health = 0;
-	} else {
-	    isAlive = true;
-	}
-    }
+    protected abstract int getDefaultHealth();
+    protected abstract int getDefaultAttack();
 }

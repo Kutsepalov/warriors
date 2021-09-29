@@ -22,17 +22,16 @@ public class Army<T extends Unit> {
     
     public void addUnit(T unit) {
 	if(unit.isAlive()) {
-	    units.push(unit);
+	    units.add(unit);
 	} else {
 	    throw new IllegalArgumentException("Unit is dead");
 	}
     }
     
-    @SuppressWarnings("deprecation")
     public void addUnit(int amount, Class<? extends T> unit) {
 	try {
 	    for(int i = 0; i < amount; i++) {		
-		units.push(unit.newInstance());
+		units.add(unit.getDeclaredConstructor().newInstance());
 	    }
 	} catch (ReflectiveOperationException e) {
 	    throw new IllegalStateException("Something wrong with class");
@@ -47,6 +46,10 @@ public class Army<T extends Unit> {
     public T peek() {
 	clear();
 	return units.peek();
+    }
+    
+    public T getUnit(int id) {
+	return ((LinkedList<T>) units).get(id);
     }
     
     public int size() {

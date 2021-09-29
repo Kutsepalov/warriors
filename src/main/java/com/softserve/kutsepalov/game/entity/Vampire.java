@@ -16,13 +16,7 @@ public class Vampire extends Warrior {
     public static final int DEFAULT_ATTACK = 4;
     public static final int VAMPIRISM_PERCENTAGE = 50;
     
-    private int vampirism;
-    
-    public Vampire() {
-	this.setHealth(MAX_HEALTH);
-	this.setAttack(DEFAULT_ATTACK);
-	this.setVampirism(VAMPIRISM_PERCENTAGE);
-    }
+    private int vampirism = getDefaultVampirismPercentage();
     
     @Override
     public boolean hit(Unit enemy) {
@@ -55,5 +49,19 @@ public class Vampire extends Warrior {
      */
     protected void setVampirism(int percent) {
         this.vampirism = percent;
+    }
+    
+    @Override
+    protected int getDefaultHealth() {
+	return MAX_HEALTH;
+    }
+
+    @Override
+    protected int getDefaultAttack() {
+	return DEFAULT_ATTACK;
+    }
+    
+    protected int getDefaultVampirismPercentage() {
+	return VAMPIRISM_PERCENTAGE;
     }
 }

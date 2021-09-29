@@ -29,6 +29,9 @@ public class WarriorFactory {
 	    case VAMPIRE:
     	    	toReturn = new Vampire();
     	    	break;
+	    case LANCER:
+		toReturn = new Lancer();
+		break;
     	    default: 
     		throw new IllegalArgumentException("Wrong type: " + type);
 	}
