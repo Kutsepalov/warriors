@@ -5,7 +5,9 @@
  *
  * Created on Sep 22, 2021 9:35:17 AM
  */
-package com.softserve.kutsepalov.game.entity;
+package com.softserve.kutsepalov.game.entity.ability;
+
+import com.softserve.kutsepalov.game.entity.Unit;
 
 /**
  * @author Max Kutsepalov

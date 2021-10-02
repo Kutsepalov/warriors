@@ -13,14 +13,14 @@ package com.softserve.kutsepalov.game.entity;
  */
 public class Defender extends Warrior {
     public static final int MAX_HEALTH = 60;
-    public static final int DEFAULT_ATTACK = 3;
-    public static final int DEFAULT_DEFENSE = 2;
+    public static final int ATTACK = 3;
+    public static final int DEFENSE = 2;
     
-    private int defense = getDefaultDefense();
+    private int def = getDefaultDefense();
     
     @Override
     protected void getDamage(int damage) {
-	damage -= defense;
+	damage -= def;
 	if(damage < 0) {
 	    damage = 0;
 	}
@@ -31,14 +31,14 @@ public class Defender extends Warrior {
      * @return the defense
      */
     public int getDefense() {
-        return defense;
+        return def;
     }
 
     /**
      * @param defense the defense to set
      */
-    protected void setDefense(int defense) {
-        this.defense = defense;
+    protected void setDefense(int def) {
+        this.def = def;
     }
     
     @Override
@@ -48,10 +48,10 @@ public class Defender extends Warrior {
 
     @Override
     protected int getDefaultAttack() {
-	return DEFAULT_ATTACK;
+	return ATTACK;
     }
     
     protected int getDefaultDefense() {
-	return DEFAULT_DEFENSE;
+	return DEFENSE;
     }
 }

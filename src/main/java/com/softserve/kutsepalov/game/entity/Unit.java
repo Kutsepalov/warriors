@@ -46,6 +46,8 @@ public abstract class Unit {
     protected void setHealth(int health) {
 	if(health < 0) {
 	    health = 0;
+	} else if(health > getDefaultHealth()) {
+	    health = getDefaultHealth();
 	}
         this.health = health;
     }
