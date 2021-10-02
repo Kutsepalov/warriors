@@ -7,13 +7,15 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
+import com.softserve.kutsepalov.game.entity.ability.Fighter;
+
 /**
  * @author Max Kutsepalov
  *
  */
 public class Warrior extends Unit implements Fighter {
     public static final int MAX_HEALTH = 50;
-    public static final int DEFAULT_ATTACK = 5;
+    public static final int ATTACK = 5;
        
     @Override
     public boolean hit(Unit enemy) {
@@ -34,7 +36,7 @@ public class Warrior extends Unit implements Fighter {
 
     @Override
     protected int getDefaultAttack() {
-	return DEFAULT_ATTACK;
+	return ATTACK;
     }
  
 }

@@ -40,7 +40,7 @@ public class Army<T extends Unit> {
     
     public T removeUnit() {
 	clear();
-	return units.pollFirst();
+	return units.poll();
     }
     
     public T peek() {

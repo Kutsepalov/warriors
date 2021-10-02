@@ -13,7 +13,7 @@ package com.softserve.kutsepalov.game.entity;
  */
 public class Vampire extends Warrior {
     public static final int MAX_HEALTH = 40;
-    public static final int DEFAULT_ATTACK = 4;
+    public static final int ATTACK = 4;
     public static final int VAMPIRISM_PERCENTAGE = 50;
     
     private int vampirism = getDefaultVampirismPercentage();
@@ -30,11 +30,7 @@ public class Vampire extends Warrior {
     private void restoreHealth(int damage) {
 	final int maxPercent = 100;
 	int restoreHp = damage * vampirism / maxPercent;
-	int futureHp = this.getHealth() + restoreHp;
-	if(futureHp > MAX_HEALTH) {
-	    futureHp = MAX_HEALTH;
-	}
-	this.setHealth(futureHp);
+	this.setHealth(this.getHealth() + restoreHp);
     }
     
     /**
@@ -58,7 +54,7 @@ public class Vampire extends Warrior {
 
     @Override
     protected int getDefaultAttack() {
-	return DEFAULT_ATTACK;
+	return ATTACK;
     }
     
     protected int getDefaultVampirismPercentage() {

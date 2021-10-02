@@ -8,8 +8,13 @@
 package com.softserve.kutsepalov.game;
 
 import com.softserve.kutsepalov.game.collection.Army;
-import com.softserve.kutsepalov.game.entity.MultiFighter;
+import com.softserve.kutsepalov.game.entity.Knight;
+import com.softserve.kutsepalov.game.entity.Unit;
 import com.softserve.kutsepalov.game.entity.Warrior;
+import com.softserve.kutsepalov.game.entity.ability.Curer;
+import com.softserve.kutsepalov.game.entity.ability.Fighter;
+import com.softserve.kutsepalov.game.entity.ability.MultiFighter;
+import static java.lang.Math.min;
 
 /**
  * @author Max Kutsepalov
@@ -28,39 +33,89 @@ public final class Battle {
      * @param defender warrior
      * @return <b>true</b> if the attacker wins the battle
      */
-    public static boolean fight(Warrior attacker, Warrior defender) {
-	boolean res = false;
+    public static boolean fight(Unit attacker, Unit defender) {
+	Fighter attackerF = null;
+	Fighter defenderF = null;
+	
+	if(attacker instanceof Fighter) {
+	    attackerF = (Fighter) attacker;
+	}
+	if(defender instanceof Fighter) {
+	    defenderF = (Fighter) defender;
+	}	
+	killIfNotFighters(attacker, defender);	
 	while (attacker.isAlive() && defender.isAlive()) {
-	    boolean hasDefenderDied = attacker.hit(defender);
-	    if (!hasDefenderDied) {
-		defender.hit(attacker);
+	    boolean hasDefenderDied = false;
+	    
+	    if(attackerF != null) {
+		hasDefenderDied = attackerF.hit(defender);
+	    }
+	    
+	    if (!hasDefenderDied && defenderF != null) {
+		defenderF.hit(attacker);
 	    }
 	}
-	if (attacker.isAlive()) {
+	return attacker.isAlive();
+    }
+    
+    public static boolean straightFight(Army<? extends Unit> attacker, Army<? extends Unit> defender) {
+	Unit[] attackers;
+	Unit[] defenders;
+	
+	while(!attacker.isEmpty() && !defender.isEmpty()) {
+	    int minSize = min(attacker.size(), defender.size());
+	    
+	    attackers = toArray(minSize, attacker);
+	    defenders = toArray(minSize,  defender);
+	    for(int i = 0; i < minSize; i++) {
+		fight(attackers[i], defenders[i]);
+	    }
+	}
+	return !attacker.isEmpty();
+    }
+
+    
+    public static boolean fight(Army<? extends Unit> attacker, Army<? extends Unit> defender) {
+	while (!attacker.isEmpty() && !defender.isEmpty()) {
+	    Unit x = defender.peek();
+	    halfRoundWithArmies(attacker, defender);
+	    if (x.isAlive()) {
+		halfRoundWithArmies(defender, attacker);
+	    }
+	}
+	return !attacker.isEmpty();
+    }
+
+    private static void halfRoundWithArmies(Army<? extends Unit> first, Army<? extends Unit> second) {
+	if (!killIfNotFighters(first.peek(), second.peek())
+		&& first.peek() instanceof Fighter) {	    
+	    if (first.peek() instanceof MultiFighter) {
+		((MultiFighter) first.peek()).hit(second);
+	    } else {
+		((Fighter) first.peek()).hit(second.peek());
+	    }
+	    if (first.size() > 1 && first.getUnit(1) instanceof Curer) {
+		((Curer) first.getUnit(1)).heal(first.peek());
+	    }
+	}
+    }
+    
+    private static boolean killIfNotFighters(Unit one, Unit two) {
+	boolean res = false;
+	Warrior arbiter = new Knight();
+	if(!(one instanceof Fighter) && !(two instanceof Fighter)) {
+	    fight(arbiter, one);
+	    fight(arbiter, two);
 	    res = true;
 	}
 	return res;
     }
-
-    public static boolean fight(Army<Warrior> attacker, Army<Warrior> defender) {
-	boolean res = false;
-	while (!attacker.isEmpty() && !defender.isEmpty()) {
-	    if (attacker.peek() instanceof MultiFighter) {
-		((MultiFighter) attacker.peek()).hit(defender);
-	    } else {
-		attacker.peek().hit(defender.peek());
-	    }
-	    if (!defender.isEmpty()) {
-		if (defender.peek() instanceof MultiFighter) {
-		    ((MultiFighter) defender.peek()).hit(attacker);
-		} else {
-		    defender.peek().hit(attacker.peek());
-		}
-	    }
+    
+    private static Unit[] toArray(int size, Army<? extends Unit> army) {
+	Unit[] units = new Unit[size];
+	for(int i = 0; i < size; i++) {
+	    units[i] = army.getUnit(i);
 	}
-	if (!attacker.isEmpty()) {
-	    res = true;
-	}
-	return res;
+	return units;
     }
 }

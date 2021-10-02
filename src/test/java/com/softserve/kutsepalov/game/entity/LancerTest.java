@@ -44,7 +44,7 @@ class LancerTest {
 	army.addUnit(new Defender());
 	bruce.hit(army);
 	int healthAfterDamage = army.getUnit(1).getHealth();
-	assertEquals(bruce.getAttack() / 2 - Defender.DEFAULT_DEFENSE, Defender.MAX_HEALTH - healthAfterDamage);
+	assertEquals(bruce.getAttack() / 2 - Defender.DEFENSE, Defender.MAX_HEALTH - healthAfterDamage);
     }
     
     @Test
