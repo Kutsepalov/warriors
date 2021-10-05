@@ -13,9 +13,9 @@ import com.softserve.kutsepalov.game.entity.*;
  * @author Max Kutsepalov
  *
  */
-public class WarriorFactory {
-    public Warrior getWarrior(WarriorTypes type) {
-	Warrior toReturn;
+public class UnitFactory {
+    public Unit getUnit(UnitTypes type) {
+	Unit toReturn;
 	switch(type) {
 	    case WARRIOR:
     	    	toReturn = new Warrior();
@@ -31,6 +31,9 @@ public class WarriorFactory {
     	    	break;
 	    case LANCER:
 		toReturn = new Lancer();
+		break;
+	    case HEALER:
+		toReturn = new Healer();
 		break;
     	    default: 
     		throw new IllegalArgumentException("Wrong type: " + type);

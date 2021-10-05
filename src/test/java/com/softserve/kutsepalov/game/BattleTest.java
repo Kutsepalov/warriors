@@ -21,6 +21,11 @@ import com.softserve.kutsepalov.game.entity.Lancer;
 import com.softserve.kutsepalov.game.entity.Unit;
 import com.softserve.kutsepalov.game.entity.Vampire;
 import com.softserve.kutsepalov.game.entity.Warrior;
+import com.softserve.kutsepalov.game.entity.item.GreatAxe;
+import com.softserve.kutsepalov.game.entity.item.Katana;
+import com.softserve.kutsepalov.game.entity.item.MagicWand;
+import com.softserve.kutsepalov.game.entity.item.Sword;
+import com.softserve.kutsepalov.game.entity.item.Weapon;
 
 /**
  * @author Max Kutsepalov
@@ -197,5 +202,88 @@ class BattleTest {
 	enemy.addUnit(2, Vampire.class);
 	enemy.addUnit(4, Lancer.class);
 	assertTrue(Battle.straightFight(hero, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmiesWithWeapons1() {
+	Weapon weapon1 = new MagicWand();
+	Weapon weapon2 = new GreatAxe();
+	Army<Unit> my = new Army<>();
+	my.addUnit(1, Knight.class);
+	my.addUnit(1, Lancer.class);
+	
+	Army<Unit> enemy = new Army<>();
+	enemy.addUnit(1, Vampire.class);
+	enemy.addUnit(1, Healer.class);
+	
+	my.getUnit(0).equipWeapon(weapon1);
+	my.getUnit(1).equipWeapon(weapon2);
+	
+	enemy.getUnit(0).equipWeapon(weapon1);
+	enemy.getUnit(1).equipWeapon(weapon2);
+	
+	assertTrue(Battle.fight(my, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmiesWithWeapons2() {
+	Weapon weapon1 = new Sword();
+	Weapon weapon2 = new GreatAxe();
+	Army<Unit> my = new Army<>();
+	my.addUnit(1, Defender.class);
+	my.addUnit(1, Warrior.class);
+	
+	Army<Unit> enemy = new Army<>();
+	enemy.addUnit(1, Knight.class);
+	enemy.addUnit(1, Healer.class);
+	
+	my.getUnit(0).equipWeapon(weapon2);
+	my.getUnit(1).equipWeapon(weapon2);
+	
+	enemy.getUnit(0).equipWeapon(weapon1);
+	enemy.getUnit(1).equipWeapon(weapon1);
+	
+	assertTrue(Battle.fight(my, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmiesWithWeapons3() {
+	Weapon weapon1 = new Katana();
+	Army<Unit> my = new Army<>();
+	my.addUnit(2, Defender.class);
+	
+	Army<Unit> enemy = new Army<>();
+	enemy.addUnit(1, Knight.class);
+	enemy.addUnit(1, Vampire.class);
+	
+	my.getUnit(0).equipWeapon(weapon1);
+	my.getUnit(1).equipWeapon(weapon1);
+	
+	enemy.getUnit(0).equipWeapon(weapon1);
+	enemy.getUnit(1).equipWeapon(weapon1);
+	
+	assertFalse(Battle.fight(my, enemy));
+    }
+    
+    @Test
+    void battleBetweenArmiesWithWeapons4() {
+	Weapon weapon1 = new Weapon(-20, 6, 1, 40, -2);
+	Weapon weapon2 = new Weapon(20, -2, 2, -55, 3);
+	Army<Unit> my = new Army<>();
+	my.addUnit(3, Knight.class);
+	
+	Army<Unit> enemy = new Army<>();
+	enemy.addUnit(1, Warrior.class);
+	enemy.addUnit(2, Defender.class);
+	
+	my.getUnit(0).equipWeapon(weapon1);
+	my.getUnit(1).equipWeapon(weapon1);
+	my.getUnit(2).equipWeapon(weapon2);
+	
+	enemy.getUnit(0).equipWeapon(weapon1);
+	enemy.getUnit(1).equipWeapon(weapon2);
+	enemy.getUnit(2).equipWeapon(weapon2);
+
+	assertTrue(Battle.fight(my, enemy));
     }
 }

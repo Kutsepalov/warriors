@@ -7,26 +7,27 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.ToIntFunction;
+
+import com.softserve.kutsepalov.game.entity.item.Weapon;
+
 /**
  * @author Max Kutsepalov
  *
  */
 public abstract class Unit {
-    private int health = getDefaultHealth();
-    private int attack = getDefaultAttack();
+    private List<Weapon> equipment = new ArrayList<>();
+    private int health;
+    private int attack;
     
-    /**
-     * @return the health
-     */
-    public int getHealth() {
-        return health;
+    protected Unit() {
+	updateStates();
     }
-    /**
-     * @return the damage
-     */
-    public int getAttack() {
-        return attack;
-    }
+    
     /**
      * @return the isAlive
      */
@@ -39,30 +40,66 @@ public abstract class Unit {
 	}
         return isAlive;
     }
-
-    /**
-     * @param health the health of unit to set
-     */
-    protected void setHealth(int health) {
-	if(health < 0) {
-	    health = 0;
-	} else if(health > getDefaultHealth()) {
-	    health = getDefaultHealth();
-	}
-        this.health = health;
-    }
-    
-    /**
-     * @param attack the attack of unit to set
-     */
-    protected void setAttack(int attack) {
-        this.attack = attack;
-    }
     
     protected void getDamage(int damage) {
 	this.setHealth(health - damage);
     }
     
+    public Unit equipWeapon(Weapon weapon) {
+	requireNonNull(weapon, "weapon must not be null");
+	equipment.add(weapon);
+	updateStates();
+	return this;
+    }
+    
+    protected void updateStates() {
+	health = toPositiveOrZero(getDefaultHealth() + sumAllValuesInEquipment(Weapon::getHealth));
+	attack = toPositiveOrZero(getDefaultAttack() + sumAllValuesInEquipment(Weapon::getAttack));
+    }
+    
     protected abstract int getDefaultHealth();
     protected abstract int getDefaultAttack();
+    
+    protected static int toPositiveOrZero(int value) {
+	if(value < 0) {
+	    value = 0;
+	}
+	return value;
+    }
+    
+    protected int sumAllValuesInEquipment(ToIntFunction<? super Weapon> func) {
+	return equipment.stream().mapToInt(func).sum();
+    }
+    
+    /**
+     * @return the health
+     */
+    public int getHealth() {
+	return health;
+    }
+    /**
+     * @return the damage
+     */
+    public int getAttack() {
+	return attack;
+    }
+
+    /**
+     * @param health the health of unit to set
+     */
+    protected void setHealth(int health) {
+	if(health > getDefaultHealth()) {
+	    health = getDefaultHealth();
+	} else {
+	    health = toPositiveOrZero(health);
+	}
+        this.health = health;
+    }
+
+    /**
+     * @param attack the attack of unit to set
+     */
+    protected void setAttack(int attack) {
+        this.attack = toPositiveOrZero(attack);
+    }
 }
