@@ -11,10 +11,11 @@ package com.softserve.kutsepalov.game.entity;
  * @author Max Kutsepalov
  *
  */
-public enum WarriorTypes {
+public enum UnitTypes {
     WARRIOR,
     KNIGHT,
     DEFENDER,
     VAMPIRE,
-    LANCER
+    LANCER,
+    HEALER
 }

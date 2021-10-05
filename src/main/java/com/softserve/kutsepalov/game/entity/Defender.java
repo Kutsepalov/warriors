@@ -7,6 +7,8 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
+import com.softserve.kutsepalov.game.entity.item.Weapon;
+
 /**
  * @author Max Kutsepalov
  *
@@ -16,7 +18,13 @@ public class Defender extends Warrior {
     public static final int ATTACK = 3;
     public static final int DEFENSE = 2;
     
-    private int def = getDefaultDefense();
+    private int def;
+    
+    @Override
+    protected void updateStates() {
+	def = toPositiveOrZero(getDefaultDefense() + sumAllValuesInEquipment(Weapon::getDefense));
+	super.updateStates();
+    }
     
     @Override
     protected void getDamage(int damage) {
@@ -25,20 +33,6 @@ public class Defender extends Warrior {
 	    damage = 0;
 	}
 	super.getDamage(damage);
-    }
-
-    /**
-     * @return the defense
-     */
-    public int getDefense() {
-        return def;
-    }
-
-    /**
-     * @param defense the defense to set
-     */
-    protected void setDefense(int def) {
-        this.def = def;
     }
     
     @Override
@@ -54,4 +48,19 @@ public class Defender extends Warrior {
     protected int getDefaultDefense() {
 	return DEFENSE;
     }
+    
+    /**
+     * @return the defense
+     */
+    public int getDefense() {
+	return def;
+    }
+    
+    /**
+     * @param defense the defense to set
+     */
+    protected void setDefense(int def) {
+	this.def = def;
+    }
+
 }

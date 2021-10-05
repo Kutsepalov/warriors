@@ -12,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.softserve.kutsepalov.game.factory.WarriorFactory;
+import com.softserve.kutsepalov.game.factory.UnitFactory;
 
 /**
  * @author Max Kutsepalov
  *
  */
 class VampireTest {
-    private WarriorFactory factory = new WarriorFactory();
-    private Warrior bruce = factory.getWarrior(WarriorTypes.VAMPIRE);
-    private Warrior victim = factory.getWarrior(WarriorTypes.WARRIOR);;
+    private UnitFactory factory = new UnitFactory();
+    private Warrior bruce = (Warrior) factory.getUnit(UnitTypes.VAMPIRE);
+    private Warrior victim = (Warrior) factory.getUnit(UnitTypes.WARRIOR);;
     
     @BeforeEach
     void setUpBeforeEach() {

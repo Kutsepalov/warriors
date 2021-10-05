@@ -12,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.softserve.kutsepalov.game.collection.Army;
-import com.softserve.kutsepalov.game.factory.WarriorFactory;
+import com.softserve.kutsepalov.game.factory.UnitFactory;
 
 /**
  * @author Max Kutsepalov
  *
  */
 class LancerTest {
-    private WarriorFactory factory = new WarriorFactory();
+    private UnitFactory factory = new UnitFactory();
     
-    private Lancer bruce = (Lancer) factory.getWarrior(WarriorTypes.LANCER);
+    private Lancer bruce = (Lancer) factory.getUnit(UnitTypes.LANCER);
     
     @Test
     void lancer_should_damage_two_warriors_in_army() {

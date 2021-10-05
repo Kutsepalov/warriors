@@ -7,6 +7,8 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
+import com.softserve.kutsepalov.game.entity.item.Weapon;
+
 /**
  * @author Max Kutsepalov
  *
@@ -16,7 +18,7 @@ public class Vampire extends Warrior {
     public static final int ATTACK = 4;
     public static final int VAMPIRISM_PERCENTAGE = 50;
     
-    private int vampirism = getDefaultVampirismPercentage();
+    private int vampirism;
     
     @Override
     public boolean hit(Unit enemy) {
@@ -33,18 +35,10 @@ public class Vampire extends Warrior {
 	this.setHealth(this.getHealth() + restoreHp);
     }
     
-    /**
-     * @return the vampirism
-     */
-    protected int getVampirism() {
-        return vampirism;
-    }
-
-    /**
-     * @param percent the vampirism to set
-     */
-    protected void setVampirism(int percent) {
-        this.vampirism = percent;
+    @Override
+    protected void updateStates() {
+	vampirism = toPositiveOrZero(getDefaultVampirismPercentage() + sumAllValuesInEquipment(Weapon::getVampirism));
+	super.updateStates();
     }
     
     @Override
@@ -59,5 +53,19 @@ public class Vampire extends Warrior {
     
     protected int getDefaultVampirismPercentage() {
 	return VAMPIRISM_PERCENTAGE;
+    }
+    
+    /**
+     * @return the vampirism
+     */
+    public int getVampirism() {
+	return vampirism;
+    }
+    
+    /**
+     * @param percent the vampirism to set
+     */
+    protected void setVampirism(int percent) {
+	this.vampirism = percent;
     }
 }
