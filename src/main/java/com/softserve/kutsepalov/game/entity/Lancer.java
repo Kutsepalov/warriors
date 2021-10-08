@@ -7,8 +7,8 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
-import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.entity.ability.MultiFighter;
+import com.softserve.kutsepalov.game.platoon.Army;
 
 /**
  * @author Max Kutsepalov

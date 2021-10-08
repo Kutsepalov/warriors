@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,10 +21,7 @@ import org.junit.jupiter.api.Test;
 class WarriorTest {
     private static Warrior victim;
     private static Warrior attacker;
-    
-    /**
-     * @throws java.lang.Exception
-     */
+
     @BeforeAll
     static void setUpBeforeClass() {
 	attacker = new Knight();
@@ -37,12 +35,14 @@ class WarriorTest {
     }
     
     @Test
-    void hitShouldReturnFalse() {
+    @DisplayName("Method hit should return false")
+    void warriorAbility1() {
 	assertFalse(attacker.hit(victim));
     }
     
     @Test
-    void hitsShouldReturnTrue() {
+    @DisplayName("Method hit should return true after death rival")
+    void warriorAbility2() {
 	attacker.hit(victim);
 	assertTrue(attacker.hit(victim));
     }

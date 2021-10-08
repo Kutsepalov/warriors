@@ -7,23 +7,20 @@
  */
 package com.softserve.kutsepalov.game.entity;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import com.softserve.kutsepalov.game.Battle;
-import com.softserve.kutsepalov.game.collection.Army;
+import com.softserve.kutsepalov.game.factory.UnitFactory;
+import com.softserve.kutsepalov.game.platoon.Army;
 
 /**
  * @author Max Kutsepalov
  *
  */
 class DefenderTest {
-    private Warrior chuck;
-    private Warrior bruce;
-    private Warrior carl;
+    private UnitFactory factory = new UnitFactory();
 
     private Army<Warrior> hero; 
     private Army<Warrior> enemy;
@@ -32,31 +29,42 @@ class DefenderTest {
     void setUpBefore() {
 	hero = new Army<>();
 	enemy = new Army<>();
-	
-	chuck = new Warrior();
-	bruce = new Knight();
-	carl = new Defender();
     }
     
     @Test
-    void carlShouldWinChuck() {
-	assertTrue(Battle.fight(carl, chuck));
+    @DisplayName("Defender should take less actual damage")
+    void defenseTest() {
+	Warrior attacker = (Warrior) factory.getUnit(UnitTypes.WARRIOR);
+	Defender defender = (Defender) factory.getUnit(UnitTypes.DEFENDER);
+	attacker.hit(defender);
+	assertNotEquals(Warrior.ATTACK, Defender.MAX_HEALTH - defender.getHealth());
     }
     
     @Test
-    void carlShouldLoseBruce() {
-	assertFalse(Battle.fight(carl, bruce));
+    @DisplayName("Defender should win Warrior in fight")
+    void fightWithDefender1() {
+	assertTrue(Battle.fight(factory.getUnit(UnitTypes.DEFENDER),
+		factory.getUnit(UnitTypes.WARRIOR)));
     }
     
     @Test
-    void defenderArmyShouldLoseWarriorArmy() {	
+    @DisplayName("Defender should lose Knight in fight")
+    void fightWithDefender2() {
+	assertFalse(Battle.fight(factory.getUnit(UnitTypes.DEFENDER),
+		factory.getUnit(UnitTypes.KNIGHT)));
+    }
+    
+    @Test
+    @DisplayName("Defender army should lose warrior army")
+    void fightWithDefenderArmy1() {	
 	hero.addUnit(1, Defender.class);
 	enemy.addUnit(2, Warrior.class);
 	assertFalse(Battle.fight(hero, enemy));
     }
     
     @Test
-    void defenderArmyShouldWinWarriorArmy() {
+    @DisplayName("Defender army should win warrior army")
+    void fightWithDefenderArmy2() {
 	hero.addUnit(1, Warrior.class);
 	hero.addUnit(1, Defender.class);
 	enemy.addUnit(2, Warrior.class);

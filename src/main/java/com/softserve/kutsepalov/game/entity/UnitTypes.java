@@ -17,5 +17,6 @@ public enum UnitTypes {
     DEFENDER,
     VAMPIRE,
     LANCER,
-    HEALER
+    HEALER,
+    GENERAL
 }
