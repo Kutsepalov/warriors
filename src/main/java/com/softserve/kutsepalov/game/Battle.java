@@ -7,13 +7,14 @@
  */
 package com.softserve.kutsepalov.game;
 
-import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.entity.Knight;
 import com.softserve.kutsepalov.game.entity.Unit;
 import com.softserve.kutsepalov.game.entity.Warrior;
 import com.softserve.kutsepalov.game.entity.ability.Curer;
 import com.softserve.kutsepalov.game.entity.ability.Fighter;
 import com.softserve.kutsepalov.game.entity.ability.MultiFighter;
+import com.softserve.kutsepalov.game.platoon.Army;
+
 import static java.lang.Math.min;
 
 /**

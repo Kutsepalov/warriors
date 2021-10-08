@@ -35,6 +35,9 @@ public class UnitFactory {
 	    case HEALER:
 		toReturn = new Healer();
 		break;
+	    case GENERAL:
+		toReturn = new General();
+		break;
     	    default: 
     		throw new IllegalArgumentException("Wrong type: " + type);
 	}

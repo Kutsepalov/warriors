@@ -26,6 +26,7 @@ import com.softserve.kutsepalov.game.entity.Warrior;
  *
  */
 class WeaponTest {
+    
     @Test
     @DisplayName("Weapon should increase parameters")
     void weaponTest1() {

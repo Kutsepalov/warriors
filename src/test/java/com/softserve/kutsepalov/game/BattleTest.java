@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.entity.Defender;
 import com.softserve.kutsepalov.game.entity.Healer;
 import com.softserve.kutsepalov.game.entity.Knight;
@@ -26,6 +25,7 @@ import com.softserve.kutsepalov.game.entity.item.Katana;
 import com.softserve.kutsepalov.game.entity.item.MagicWand;
 import com.softserve.kutsepalov.game.entity.item.Sword;
 import com.softserve.kutsepalov.game.entity.item.Weapon;
+import com.softserve.kutsepalov.game.platoon.Army;
 
 /**
  * @author Max Kutsepalov

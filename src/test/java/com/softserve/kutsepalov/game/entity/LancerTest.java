@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.softserve.kutsepalov.game.collection.Army;
 import com.softserve.kutsepalov.game.factory.UnitFactory;
+import com.softserve.kutsepalov.game.platoon.Army;
 
 /**
  * @author Max Kutsepalov

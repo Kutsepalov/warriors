@@ -67,7 +67,7 @@ public abstract class Unit {
 	return value;
     }
     
-    protected int sumAllValuesInEquipment(ToIntFunction<? super Weapon> func) {
+    protected final int sumAllValuesInEquipment(ToIntFunction<? super Weapon> func) {
 	return equipment.stream().mapToInt(func).sum();
     }
     
