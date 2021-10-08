@@ -9,6 +9,7 @@ package com.softserve.kutsepalov.game.entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.softserve.kutsepalov.game.factory.UnitFactory;
@@ -24,7 +25,8 @@ class LancerTest {
     private Lancer bruce = (Lancer) factory.getUnit(UnitTypes.LANCER);
     
     @Test
-    void lancer_should_damage_two_warriors_in_army() {
+    @DisplayName("Lancer should damage two warriors in army")
+    void lancerAbility1() {
 	Army<Warrior> army = new Army<>();
 	army.addUnit(3, Warrior.class);
 	bruce.hit(army);
@@ -38,17 +40,19 @@ class LancerTest {
     }
     
     @Test
-    void lancers_damage_to_the_second_defender_soldier_should_be_halved_and_reduced_by_defense() {
+    @DisplayName("Lancer damage to the second defender soldier should be halved and reduced by defense")
+    void lancerAbility2() {
 	Army<Warrior> army = new Army<>();
 	army.addUnit(1, Warrior.class);
-	army.addUnit(new Defender());
+	army.addUnit(1, Defender.class);
 	bruce.hit(army);
 	int healthAfterDamage = army.getUnit(1).getHealth();
 	assertEquals(bruce.getAttack() / 2 - Defender.DEFENSE, Defender.MAX_HEALTH - healthAfterDamage);
     }
     
     @Test
-    void lancer_should_damage_next_warrior_after_death_second_warrior() {
+    @DisplayName("Lancer should damage next warrior after death second warrior")
+    void lancerAbility3() {
 	Army<Warrior> army = new Army<>();
 	army.addUnit(2, Warrior.class);
 	army.getUnit(1).setHealth(1);

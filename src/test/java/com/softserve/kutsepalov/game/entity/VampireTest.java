@@ -10,6 +10,7 @@ package com.softserve.kutsepalov.game.entity;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.softserve.kutsepalov.game.factory.UnitFactory;
@@ -30,7 +31,8 @@ class VampireTest {
     }
     
     @Test
-    void vampire_shouldnt_restore_health_from_damage_when_healthy() {
+    @DisplayName("Vampire shouldn't restore health from damage when healthy")
+    void vampireAbility1() {
 	bruce.setHealth(40);
 	int vampireHealth = bruce.getHealth();
 	bruce.hit(victim);
@@ -38,14 +40,16 @@ class VampireTest {
     }
     
     @Test
-    void vampire_should_restore_health_by_fifty_percent_from_damage_to_Warrior() {
+    @DisplayName("Vampire should restore health by fifty percent from damage to Warrior")
+    void vampireAbility2() {
 	int vampireHealth = bruce.getHealth();
 	bruce.hit(victim);
 	assertEquals(vampireHealth + bruce.getAttack() / 2, bruce.getHealth());
     }
     
     @Test
-    void vampire_should_restore_health_by_fifty_percent_from_damage_to_Defender() {
+    @DisplayName("Vampire should restore health by fifty percent from damage to Defender")
+    void vampireAbility3() {
 	Defender victim = new Defender();
 	int vampireHealth = bruce.getHealth();
 	bruce.hit(victim);
@@ -53,7 +57,8 @@ class VampireTest {
     }
     
     @Test
-    void vampire_shouldnt_restore_health_from_damage_after_death() {
+    @DisplayName("Vampire shouldn't restore health from damage after death")
+    void vampireAbility4() {
 	bruce.setHealth(0);
 	bruce.hit(victim);
 	assertEquals(0, bruce.getHealth());

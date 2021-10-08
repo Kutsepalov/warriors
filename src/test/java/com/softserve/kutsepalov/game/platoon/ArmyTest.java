@@ -23,36 +23,47 @@ import com.softserve.kutsepalov.game.entity.General;
  *
  */
 class ArmyTest {
-    private Army<Unit> a1;
+    private Army<Unit> a;
     private General lord;
     
     @BeforeEach
     void beforeEach() {
-	a1 = new Army<>();
+	a = new Army<>();
 	lord = new General();
     }
     
     @Test
     @DisplayName("After sort Lancer should stay first and then Healers")
-    void warlordTest() {         
-        a1.addUnit(3, Healer.class);
-        a1.addUnit(3, Lancer.class);
-        a1.addUnit(lord);
-        a1.moveUnits();
-        assertTrue(a1.peek() instanceof Lancer 
-        	&& a1.getUnit(1) instanceof Healer);
+    void warlordAbility() {         
+        a.addUnit(3, Healer.class);
+        a.addUnit(3, Lancer.class);
+        a.addUnit(lord);
+        a.moveUnits();
+        assertTrue(a.peek() instanceof Lancer 
+        	&& a.getUnit(1) instanceof Healer);
     }
     
     @Test
     @DisplayName("Army can't be sorted without Warlord")
-    void warlordTest2() {         
-        a1.addUnit(3, Healer.class);
-        a1.addUnit(3, Lancer.class);
-        a1.addUnit(lord);
+    void warlordAbility2() {         
+        a.addUnit(3, Healer.class);
+        a.addUnit(3, Lancer.class);
         try {	    
-            a1.moveUnits();
+            a.moveUnits();
             fail();
-	} catch (IllegalStateException e) {
+	} catch (NullPointerException e) {
+	    return;
+	}
+    }
+    
+    @Test
+    @DisplayName("Army can't consist of more than 1 Warlord")
+    void warlordAbility3() {         
+        a.addUnit(lord);
+        try {	    
+            a.addUnit(lord);
+            fail();
+	} catch (IllegalArgumentException e) {
 	    return;
 	}
     }

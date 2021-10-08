@@ -29,7 +29,7 @@ class WeaponTest {
     
     @Test
     @DisplayName("Weapon should increase parameters")
-    void weaponTest1() {
+    void weapon1() {
 	Weapon weapon = new Weapon(5, 5, 5, 5, 5);
 	Warrior warrior = new Warrior();
 	warrior.equipWeapon(weapon);
@@ -39,7 +39,7 @@ class WeaponTest {
     
     @Test
     @DisplayName("Warrior should died after equip weapon")
-    void weaponTest2() {
+    void weapon2() {
 	Weapon weapon = new Weapon(-100, 0, 0, 0, 0);
 	Warrior warrior = new Warrior();
 	warrior.equipWeapon(weapon);
@@ -48,7 +48,7 @@ class WeaponTest {
     
     @Test
     @DisplayName("Weapons should increase parameters")
-    void weaponTest3() {
+    void weapon3() {
 	Weapon weapon1 = new Weapon(5, 0, 0, 0, 0);
 	Weapon weapon2 = new Weapon(5, 0, 0, 0, 0);
 
@@ -60,7 +60,8 @@ class WeaponTest {
     }
     
     @Test
-    void testUnitsWithWeapon1() {
+    @DisplayName("Unit with weapon should win in fight")
+    void unitsWithWeapon1() {
 	Unit unit1 = new Warrior();
 	Unit unit2 = new Vampire();
 	Weapon weapon1 = new Weapon(-10, 5, 0, 40, 0);
@@ -71,6 +72,7 @@ class WeaponTest {
     }
     
     @Test
+    @DisplayName("Unit with weapon should lose in fight")
     void testUnitsWithWeapon2() {
 	Unit unit1 = new Defender();
 	Unit unit2 = new Lancer();
@@ -82,6 +84,7 @@ class WeaponTest {
     }
     
     @Test
+    @DisplayName("Unit with weapon should lose in fight")
     void testUnitsWithWeapon3() {
 	Unit unit1 = new Healer();
 	Unit unit2 = new Knight();
@@ -93,6 +96,7 @@ class WeaponTest {
     }
     
     @Test
+    @DisplayName("Unit with weapon should lose in fight")
     void testUnitsWithWeapon4() {
 	Unit unit1 = new Defender();
 	Unit unit2 = new Vampire();

@@ -9,6 +9,7 @@ package com.softserve.kutsepalov.game.entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,7 +19,8 @@ import org.junit.jupiter.api.Test;
 class HealerTest {
 
     @Test
-    void healerShouldHealWarrior() {
+    @DisplayName("Healer should heal Warrior")
+    void healerAbility1() {
 	Warrior bruce = new Warrior();
 	Healer bill = new Healer();
 	bruce.hit(bruce);
@@ -29,7 +31,8 @@ class HealerTest {
     }
     
     @Test
-    void healerShouldntHealDeadWarrior() {
+    @DisplayName("Healer shouldn't heal dead Warrior")
+    void healerAbility2() {
 	Warrior bruce = new Warrior();
 	Healer bill = new Healer();
 	bruce.setHealth(0);
